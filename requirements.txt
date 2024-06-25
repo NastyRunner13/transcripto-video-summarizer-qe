@@ -1,0 +1,7 @@
+streamlit
+torch
+torchaudio
+transformers
+moviepy
+pydub
+google-generativeai
