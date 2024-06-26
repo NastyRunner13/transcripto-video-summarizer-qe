@@ -11,4 +11,41 @@ Transcripto is a Streamlit-based web application that transcribes, summarizes, a
 - Interactive video player with timestamp-linked transcriptions
 - Automatic video resizing and padding to 16:9 aspect ratio
 
+## LAYOUT
+
+transcripto/
+│
+├── main.py
+├── app/
+│ ├── **init**.py
+│ ├── app.py
+│ ├── layout.py
+│ ├── transcriptions.py
+│ ├── summarization.py
+│ ├── question_answering.py
+│ ├── pdf_generation.py
+│ └── utils.py
+│
+├── models/
+│ ├── **init**.py
+│ ├── genai_model.py
+│ └── wav2vec_model.py
+│
+├── services/
+│ ├── **init**.py
+│ ├── audio_service.py
+│ ├── video_service.py
+│ └── file_service.py
+│
+├── data/
+│ ├── **init**.py
+│ ├── config.py
+│ └── session_state.py
+│
+├── static/
+│ ├── **init**.py
+│ └── styles.css
+├── .env
+└── requirements.txt
+
 ## UNDER DEVELOPEMENT
