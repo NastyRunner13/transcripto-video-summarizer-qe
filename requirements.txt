@@ -5,3 +5,4 @@ transformers
 moviepy
 pydub
 google-generativeai
+python-dotenv
