@@ -48,4 +48,4 @@ transcripto/
 ├── .env
 └── requirements.txt
 
-## UNDER DEVELOPEMENT
+# Under Development
