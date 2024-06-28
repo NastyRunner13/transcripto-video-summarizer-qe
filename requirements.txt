@@ -1,8 +1,9 @@
 streamlit
 torch
 torchaudio
-transformers
 moviepy
+transformers
 pydub
 google-generativeai
+fpdf
 python-dotenv
