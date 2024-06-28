@@ -16,9 +16,14 @@ Transcripto is a Streamlit-based web application that transcribes, summarizes, a
 transcripto/
 │
 ├── main.py
+├── pages/
+│ ├── **init**.py
+│ ├── video_summary_qa.py
+│ ├── ocr_text_extraction.py
+│ └── about.py
+│
 ├── app/
 │ ├── **init**.py
-│ ├── app.py
 │ ├── layout.py
 │ ├── transcriptions.py
 │ ├── summarization.py
