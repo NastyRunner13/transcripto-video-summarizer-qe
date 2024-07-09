@@ -1,0 +1,14 @@
+streamlit
+easyocr
+Pillow
+numpy
+PyPDF2
+python-docx
+torch
+torchaudio
+moviepy
+transformers
+pydub
+google-generativeai
+fpdf
+python-dotenv
