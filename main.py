@@ -8,7 +8,6 @@ st.set_page_config(
 def main():
     st.sidebar.title("🔧 Tools")
     tool = st.sidebar.radio("Select a tool:", ("🏠 Home", "📹 Video Summary Tool", "📄 OCR PDF Summarizer"))
-
     if tool == "🏠 Home":
         show_home()
     elif tool == "📹 Video Summary Tool":
