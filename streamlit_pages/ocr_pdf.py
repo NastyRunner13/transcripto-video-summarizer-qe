@@ -1,15 +1,23 @@
 import streamlit as st
 from app.extract_text_from_file import extract_text_from_docx, extract_text_from_pdf, perform_ocr, load_image
 from models.google_gemini import get_response
+from prompts import SUMMARY_PROMPT, QUESTION_ANSWER_PROMPT
 
+# Initialize session state variables
 if 'text' not in st.session_state:
     st.session_state.text = ''
+if 'summary_text' not in st.session_state:
+    st.session_state.summary_text = ''
+if 'file' not in st.session_state:
+    st.session_state.file = None
+if 'user_question' not in st.session_state:
+    st.session_state.user_question = ''
 
 def ocr_pdf():
     st.title("OCR and Text Extraction Application")
 
     # File uploader
-    file = st.file_uploader("Upload Image or Document", type=["png", "jpg", "jpeg", "pdf", "docx"])
+    st.session_state.file = st.file_uploader("Upload Image or Document", type=["png", "jpg", "jpeg", "pdf", "docx"])
 
     # Language selection for OCR
     languages = st.multiselect(
@@ -18,13 +26,13 @@ def ocr_pdf():
         default=['en']
     )
 
-    if file is not None:
-        file_extension = file.name.split('.')[-1].lower()
+    if st.session_state.file is not None:
+        file_extension = st.session_state.file.name.split('.')[-1].lower()
 
         text = ''
 
         if file_extension in ["png", "jpg", "jpeg"]:
-            image = load_image(file)
+            image = load_image(st.session_state.file)
             st.image(image, caption='Uploaded Image', use_column_width=True)
             ocr_button = st.button('Perform OCR')
             if ocr_button:
@@ -37,7 +45,7 @@ def ocr_pdf():
             pdf_button = st.button('Extract text from PDF')
             if pdf_button:
                 with st.spinner('Extracting text...'):
-                    st.session_state.text = extract_text_from_pdf(file)
+                    st.session_state.text = extract_text_from_pdf(st.session_state.file)
                 st.subheader("Extracted Text from PDF:")
 
 
@@ -45,14 +53,26 @@ def ocr_pdf():
             doc_button = st.button('Extract text from DOCX')
             if doc_button:
                 with st.spinner('Extracting text...'):
-                    st.session_state.text = extract_text_from_docx(file)
+                    st.session_state.text = extract_text_from_docx(st.session_state.file)
                 st.subheader("Extracted Text from DOCX:")
 
         st.write(st.session_state.text)
 
         if st.button("Summarize text"):
             if st.session_state.text != '':
-                summary_text = get_response("You are a summarize tool, summarize the following text" + st.session_state.text)
-                st.write(summary_text)
+                with st.spinner('Summarizing text...'):
+                    st.session_state.summary_text = get_response(SUMMARY_PROMPT + st.session_state.text)
             else:
-                st.warning("Please extract text first or check your")
+                st.warning("Please extract text first or check your file")
+        st.write(st.session_state.summary_text)
+
+        st.session_state.user_question = st.text_input("Ask your question!")
+        if(st.button("Genrate Answer")):
+            if st.session_state.user_question != '':
+                with st.spinner('Generating answer...'):
+                    st.session_state.user_question_answer = get_response(QUESTION_ANSWER_PROMPT + f"Transcription: {st.session_state.text}, Question: {st.session_state.user_question}")
+            else:
+                st.warning("Please ask a question before generating answer") 
+            st.write(st.session_state.user_question_answer)
+
+        
