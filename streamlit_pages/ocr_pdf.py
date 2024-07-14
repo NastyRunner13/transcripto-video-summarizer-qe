@@ -29,8 +29,6 @@ def ocr_pdf():
     if st.session_state.file is not None:
         file_extension = st.session_state.file.name.split('.')[-1].lower()
 
-        text = ''
-
         if file_extension in ["png", "jpg", "jpeg"]:
             image = load_image(st.session_state.file)
             st.image(image, caption='Uploaded Image', use_column_width=True)
