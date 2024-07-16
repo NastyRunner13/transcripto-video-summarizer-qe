@@ -71,6 +71,6 @@ def ocr_pdf():
                     st.session_state.user_question_answer = get_response(QUESTION_ANSWER_PROMPT + f"Transcription: {st.session_state.text}, Question: {st.session_state.user_question}")
             else:
                 st.warning("Please ask a question before generating answer") 
-        st.write(st.session_state.user_question_answer)
+            st.write(st.session_state.user_question_answer)
 
         
