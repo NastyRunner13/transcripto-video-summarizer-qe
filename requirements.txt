@@ -12,3 +12,5 @@ pydub
 google-generativeai
 fpdf
 python-dotenv
+PySoundFile
+soundfile
