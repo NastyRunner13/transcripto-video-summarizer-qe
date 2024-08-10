@@ -2,7 +2,7 @@ import torch
 import torchaudio
 from pydub import AudioSegment
 import os
-from models.wave2vac2 import wav2vec2model
+from models.wav2vac2 import wav2vec2model
 import streamlit as st
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
