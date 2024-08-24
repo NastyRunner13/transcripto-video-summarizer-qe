@@ -2,7 +2,8 @@ import streamlit as st
 from streamlit_pages import ocr_pdf, video_summary_qa
 
 st.set_page_config(
-    page_title="Transcripto"
+    page_title="Transcripto",
+    layout="wide",
 )
 
 def main():

@@ -15,7 +15,7 @@ def initialize_state():
     st.session_state.user_video_question = ''
     st.session_state.user_video_question_answer = ''
     st.session_state.transcription = ''
-    st.session_state.summary_text = ''
+    st.session_state.summary_video_text = ''
     st.session_state.transcriptions = None
     st.session_state.processed_video_path = None
     st.session_state.audio_path = None
@@ -76,10 +76,10 @@ def video_summary_qa():
     if st.button("Summarize text"):
         if st.session_state.transcription_text:
             with st.spinner('Summarizing text...'):
-                st.session_state.summary_text = get_response(SUMMARY_PROMPT + st.session_state.transcription_text)
+                st.session_state.summary_video_text = get_response(SUMMARY_PROMPT + st.session_state.transcription_text)
         else:
             st.warning("Please extract text first or check your file")
-    st.write(st.session_state.summary_text)
+    st.write(st.session_state.summary_video_text)
 
     st.session_state.user_video_question = st.text_input("Ask your question!")
     if st.button("Generate Answer"):
