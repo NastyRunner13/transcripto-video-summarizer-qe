@@ -7,8 +7,6 @@ from utils.format_transcription import format_transcription
 from models.google_gemini import get_response
 from prompts import SUMMARY_PROMPT, QUESTION_ANSWER_PROMPT
 
-UPLOAD_DIR = "C:/Users/princ/Desktop/tempFiles"
-
 # Initialize session state variables
 def initialize_state():
     st.session_state.transcription_text = ''
@@ -20,12 +18,22 @@ def initialize_state():
     st.session_state.processed_video_path = None
     st.session_state.audio_path = None
 
+def ensure_directory_exists(directory_path):
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
 # Initialize session state on first load
 if 'transcriptions' not in st.session_state:
     initialize_state()
 
 def video_summary_qa():
     st.title("Transcripto - Video Summarization and Question Answering")
+
+    storage_directory = st.text_input("Enter the path for storing temporary files:")
+    global UPLOAD_DIR
+    UPLOAD_DIR = storage_directory
+
+    ensure_directory_exists(UPLOAD_DIR)
 
     uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "avi", "mov", "mkv"])
 
