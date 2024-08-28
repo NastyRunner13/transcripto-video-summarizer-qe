@@ -19,7 +19,7 @@ def transcribe_audio(audio_path, segment_length=30):
         for start in range(0, duration, segment_length):
             end = min(start + segment_length, duration)
             segment = audio[start * 1000:end * 1000]
-            segment_path = os.path.join("C:/Users/princ/Desktop/tempFiles", f"segment_{start}_{end}.wav")
+            segment_path = os.path.join(audio_path, f"segment_{start}_{end}.wav")
             segment.export(segment_path, format="wav")
 
             waveform, sample_rate = torchaudio.load(segment_path)
