@@ -2,6 +2,7 @@ import streamlit as st
 from app.extract_text_from_file import extract_text_from_docx, extract_text_from_pdf, perform_ocr, load_image
 from models.google_gemini import get_response
 from prompts import SUMMARY_PROMPT, QUESTION_ANSWER_PROMPT
+import os
 
 # Initialize session state variables
 if 'text' not in st.session_state:
@@ -13,8 +14,18 @@ if 'file' not in st.session_state:
 if 'user_question' not in st.session_state:
     st.session_state.user_question = ''
 
+def ensure_directory_exists(directory_path):
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
 def ocr_pdf():
     st.title("OCR and Text Extraction Application")
+
+    storage_directory = st.text_input("Enter the path for storing temporary files:")
+    global UPLOAD_DIR
+    UPLOAD_DIR = storage_directory
+
+    ensure_directory_exists(UPLOAD_DIR)
 
     # File uploader
     st.session_state.file = st.file_uploader("Upload Image or Document", type=["png", "jpg", "jpeg", "pdf", "docx"])
