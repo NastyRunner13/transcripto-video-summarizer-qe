@@ -24,7 +24,12 @@ def ocr_pdf():
     storage_directory = st.text_input("Enter the path for storing temporary files:")
     global UPLOAD_DIR
     UPLOAD_DIR = storage_directory
-
+    
+    # Check if storage_directory is provided
+    if not UPLOAD_DIR:
+        st.error("Storage directory path is not provided. Please enter a valid path.")
+        return
+    
     ensure_directory_exists(UPLOAD_DIR)
 
     # File uploader
