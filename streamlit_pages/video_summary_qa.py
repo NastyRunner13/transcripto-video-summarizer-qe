@@ -52,7 +52,7 @@ def video_summary_qa():
             f.write(uploaded_file.read())
 
         # Process the video
-        processed_video_path = process_video(video_path)
+        processed_video_path = process_video(video_path, UPLOAD_DIR)
         st.session_state.processed_video_path = processed_video_path
 
         # Extract audio from the video
@@ -62,7 +62,7 @@ def video_summary_qa():
         st.session_state.audio_path = audio_path
 
         # Transcribe the audio
-        transcription = transcribe_audio(audio_path)
+        transcription = transcribe_audio(audio_path, UPLOAD_DIR)
         transcriptions = format_transcription(transcription)
         st.session_state.transcriptions = transcriptions
 

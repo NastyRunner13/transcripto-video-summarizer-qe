@@ -7,7 +7,7 @@ import streamlit as st
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def transcribe_audio(audio_path, segment_length=30):
+def transcribe_audio(audio_path, upload_dir, segment_length=30):
 
     model ,processor = wav2vec2model()
 
@@ -19,7 +19,7 @@ def transcribe_audio(audio_path, segment_length=30):
         for start in range(0, duration, segment_length):
             end = min(start + segment_length, duration)
             segment = audio[start * 1000:end * 1000]
-            segment_path = os.path.join(audio_path, f"segment_{start}_{end}.wav")
+            segment_path = os.path.join(upload_dir, f"segment_{start}_{end}.wav")
             segment.export(segment_path, format="wav")
 
             waveform, sample_rate = torchaudio.load(segment_path)
