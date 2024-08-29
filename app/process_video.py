@@ -6,7 +6,7 @@ import os
 def process_video(video_path, upload_dir):
     # Ensure the file path is correctly formatted for MoviePy/FFmpeg
     video_path = os.path.abspath(video_path)  # Get the absolute path
-    video_path = f"file:///{video_path.replace('\\', '/')}"  # Convert to URI format
+    video_path = video_path.replace('\\', '/')  # Replace backslashes with forward slashes
 
     video = VideoFileClip(video_path)
 
