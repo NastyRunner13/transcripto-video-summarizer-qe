@@ -62,8 +62,9 @@ def video_summary_qa():
         st.session_state.audio_path = audio_path
 
         # Transcribe the audio
-        transcription = transcribe_audio(audio_path, UPLOAD_DIR)
-        transcriptions = format_transcription(transcription)
+        with st.spinner('Transcribing Video...'):
+            transcription = transcribe_audio(audio_path, UPLOAD_DIR)
+            transcriptions = format_transcription(transcription)
         st.session_state.transcriptions = transcriptions
 
         col1, col2 = st.columns([1, 1])
