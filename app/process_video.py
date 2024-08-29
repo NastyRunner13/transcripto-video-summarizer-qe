@@ -4,7 +4,7 @@ from moviepy.video.fx.all import resize, margin
 import os
 
 def process_video(video_path, upload_dir):
-    video = VideoFileClip(video_path)
+    video = VideoFileClip(f"file:{video_path}")
     # Resize and add black borders if necessary
     if not is_16_9_ratio(video.size):
         video = resize(video, height=1080)
